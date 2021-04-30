@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemaProiectPIU", "TemaProiectPIU.csproj", "{E9C40414-6DA1-4CFA-91E3-B59EDF71F196}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMasina", "CMasina.csproj", "{E9C40414-6DA1-4CFA-91E3-B59EDF71F196}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NivelAccesDate", "..\NivelAccesDate\NivelAccesDate.csproj", "{691F18C5-21A0-4EA9-9C4E-0C858238E4BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfataUtilizator", "..\InterfataUtilizator\InterfataUtilizator.csproj", "{F1211D1E-FB48-40E1-8727-56CE3CA5CD8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E9C40414-6DA1-4CFA-91E3-B59EDF71F196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C40414-6DA1-4CFA-91E3-B59EDF71F196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C40414-6DA1-4CFA-91E3-B59EDF71F196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{691F18C5-21A0-4EA9-9C4E-0C858238E4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691F18C5-21A0-4EA9-9C4E-0C858238E4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691F18C5-21A0-4EA9-9C4E-0C858238E4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691F18C5-21A0-4EA9-9C4E-0C858238E4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1211D1E-FB48-40E1-8727-56CE3CA5CD8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1211D1E-FB48-40E1-8727-56CE3CA5CD8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1211D1E-FB48-40E1-8727-56CE3CA5CD8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1211D1E-FB48-40E1-8727-56CE3CA5CD8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,10 +15,25 @@ persoană care cumpără mai multe mașini în aceeași zi sau dacă o persoană
 mașini în aceeași zi.
 */
 
-namespace TemaProiectPIU
+namespace CarClass
 {
-    internal class Car
+    public class Car
     {
+        private const string SEPARATOR_AFISARE = " ";
+        private const char SEPARATOR_PRINCIPAL_FISIER = ';';
+        private const char SEPARATOR_SECUNDAR_FISIER = ',';
+
+        private const int FIRMA = 0;
+        private const int MODEL = 1;
+        private const int ANFABRICATIE = 2;
+        private const int CULOARE = 3;
+        private const int PRET = 4;
+        private const int NUMEVANZATOR = 5;
+        private const int NUMECUMPARATOR = 6;
+        private const int DATATRANZACTIE = 7;
+        private const int OPTIUNI = 8;
+
+
         public string NumeVanzator { get; set; }
         public string NumeCumparator { get; set; }
         public string Firma { get; set; }
@@ -34,19 +49,55 @@ namespace TemaProiectPIU
         public Car(string info)
         {
             string[] splitInfo = info.Split(',');
-            Firma = splitInfo[0];
-            Model = splitInfo[1];
-            AnFabricatie = int.Parse(splitInfo[2]);
-            Culoare = splitInfo[3];
-            Pret = int.Parse(splitInfo[4]);
-            NumeVanzator = splitInfo[5];
-            NumeCumparator = splitInfo[6];
-            DataTranzactie = DateTime.Parse(splitInfo[7]);
+            Firma = splitInfo[FIRMA];
+            Model = splitInfo[MODEL];
+            AnFabricatie = int.Parse(splitInfo[ANFABRICATIE]);
+            Culoare = splitInfo[CULOARE];
+            Pret = int.Parse(splitInfo[PRET]);
+            NumeVanzator = splitInfo[NUMEVANZATOR];
+            NumeCumparator = splitInfo[NUMECUMPARATOR];
+            DataTranzactie = DateTime.Parse(splitInfo[DATATRANZACTIE]);
+
             List<string> opt = new List<string>();
-            for (int i = 8; i < splitInfo.Length; i++)
+            for (int i = OPTIUNI; i < splitInfo.Length; i++)
                 opt.Add(splitInfo[i]);
             Optiuni = opt;
         }
+
+        public static Car ReadCarInfo()
+        {
+            string carInfo = string.Empty;
+            Console.WriteLine("Introduceti informatiile despre masina:");
+
+            Console.Write("Firma: ");
+            carInfo = carInfo + Console.ReadLine().ToUpper() + ",";//Firma
+            Console.Write("Model: ");
+            carInfo = carInfo + Console.ReadLine().ToUpper() + ",";//Model
+            Console.Write("An Fabricatie: ");
+            carInfo = carInfo + Console.ReadLine() + ",";          //An fabricatie
+            Console.Write("Culoare: ");
+            carInfo = carInfo + Console.ReadLine().ToUpper() + ",";//Culoare
+            Console.Write("Pret: ");
+            carInfo = carInfo + Console.ReadLine() + ",";          //Pret
+            Console.Write("Nume vanzator: ");
+            carInfo = carInfo + Console.ReadLine().ToUpper() + ",";//Nume Vanzator
+            Console.Write("Nume cumparator: ");
+            carInfo = carInfo + Console.ReadLine().ToUpper() + ",";//Nume cumparator
+            Console.Write("Data tranzactie(dd.mm.yyyy): ");
+            carInfo = carInfo + Console.ReadLine() + ",";          //Data tranzacaatie
+
+            Console.WriteLine("Introduceti optiunile (ex: ABS,Geamuri electrice, Senzori ploaie): ");
+            string optiuni = Console.ReadLine().ToUpper();
+
+            if (optiuni != string.Empty)
+                carInfo = carInfo + optiuni;
+            else
+                carInfo = carInfo + "NONE";
+
+            Car newCar = new Car(carInfo);
+            return newCar;
+        }
+
 
         public void ShowCar()
         {
@@ -57,7 +108,7 @@ namespace TemaProiectPIU
             Console.WriteLine($"{"Pret",-20} {Pret + " Euro",-10}");
             Console.WriteLine($"{"Nume Vanzator",-20} {NumeVanzator,-10}");
             Console.WriteLine($"{"Nume Cumparator",-20} {NumeCumparator,-10}");
-            Console.WriteLine($"{"Data tranzactie",-20} {DataTranzactie.ToString("dd.MMMM.yyyy"),-10}");
+            Console.WriteLine($"{"Data tranzactie",-20} {DataTranzactie.ToString("dd.MM.yyyy"),-10}");
             Console.WriteLine($"{"Optiuni",-20}");
             foreach (var optiune in Optiuni)
             {
@@ -70,9 +121,49 @@ namespace TemaProiectPIU
             string optiuni = string.Empty;
             for (int i = 0; i < Optiuni.Count; i++)
                 optiuni += Optiuni[i] + "\n";
-            return "Firma:" + Firma + "\nModel: " + Model + "\nAn Fabricatie: " + AnFabricatie +
-                "\nCuloare: " + Culoare + "\nPret: " + Pret + "\nVanzator: " + NumeVanzator +
-                "\nCumparator: " + NumeCumparator + "\nOptiuni: " + optiuni +"\n";
+
+            return "Firma: " + (Firma ?? "NECUNOSCUT") + "\n" + 
+                   "Model: " + (Model ?? "NECUNOSCUT") + "\n" + 
+                   "An Fabricatie: " + (AnFabricatie.ToString() ?? "NECUNOSCUT") + "\n" +
+                   "Culoare: " + (Culoare ?? "NECUNOSCUT") + "\n" + 
+                   "Pret: " + (Pret.ToString() ?? "NECUNOSCUT") + "\n" + 
+                   "Nume Vanzator: " + (NumeVanzator ?? "NECUNOSCUT") + "\n" +
+                   "Nume Cumparator: " + (NumeCumparator ?? "NECUNOSCUT") + "\n" + 
+                   "Data Tranzactie: " + (DataTranzactie.ToString("dd.MM.yyyy") ?? "01.01.2000") + "\n" +
+                   "Optiuni:\n" + optiuni;
+        }
+
+        public string ConvertToString_File()
+        {
+            string sCarInfo;
+            //
+            sCarInfo = (Firma ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (Model ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (AnFabricatie.ToString() ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (Culoare ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (Pret.ToString() ?? "0") + SEPARATOR_SECUNDAR_FISIER +
+                       (NumeVanzator ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (NumeCumparator ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER +
+                       (DataTranzactie.ToString("dd.MM.yyyy") ?? "NECUNOSCUT") + SEPARATOR_SECUNDAR_FISIER;
+            //
+            Console.WriteLine(Optiuni.Count);
+            if (Optiuni.Count > 0)
+            {
+                for(int i = 0; i < Optiuni.Count; i++)
+                {
+                    if (i == (Optiuni.Count - 1))
+                        sCarInfo = sCarInfo + Optiuni[i];
+                    else
+                        sCarInfo = sCarInfo + Optiuni[i] + SEPARATOR_SECUNDAR_FISIER;
+                }
+            }
+            else
+            {
+                sCarInfo += "NONE";
+            }
+                
+
+            return sCarInfo;
         }
 
         public static Car PriceCompare(Car a, Car b)
@@ -87,5 +178,7 @@ namespace TemaProiectPIU
             else
                 return b;
         }
+
+
     }
 }
